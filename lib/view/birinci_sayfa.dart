@@ -1,4 +1,5 @@
 import 'package:durum_yonetimi_sepet_uygulamasi/model/Urun.dart';
+import 'package:durum_yonetimi_sepet_uygulamasi/view/sepet_sayfasi.dart';
 import 'package:durum_yonetimi_sepet_uygulamasi/view_model/aliveris_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,7 +18,19 @@ class _BirinciSayfaState extends State<BirinciSayfa> {
       appBar: AppBar(
         title: Text("AnaSayfa"),
         actions: [
-          IconButton(icon: Icon(Icons.shopping_basket), onPressed: () {}),
+          IconButton(
+            icon: Icon(Icons.shopping_basket),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) {
+                    return SepetSayfasi();
+                  },
+                ),
+              );
+            },
+          ),
         ],
       ),
       body: _buildBody(),
@@ -25,12 +38,12 @@ class _BirinciSayfaState extends State<BirinciSayfa> {
   }
 
   Widget _buildBody() {
-    return Consumer<AliverisViewModel>(
+    return Consumer<AlisverisViewModel>(
       builder: (context, viewModel, child) {
         return ListView.builder(
           itemCount: viewModel.urunler.length,
-          itemBuilder: (context, index) {return 
-            ChangeNotifierProvider.value(
+          itemBuilder: (context, index) {
+            return ChangeNotifierProvider.value(
               value: viewModel.urunler[index],
               child: _buildListItem(index),
             );
@@ -46,20 +59,21 @@ class _BirinciSayfaState extends State<BirinciSayfa> {
         return ListTile(
           title: Text(urun.ad),
           subtitle: Text("Fiyatı: ${urun.fiyat}"),
-          trailing: 
-              ElevatedButton(style: ElevatedButton.styleFrom(
+          trailing: ElevatedButton(
+            style: ElevatedButton.styleFrom(
               // Ürünün sepette olma durumuna göre rengini dinamik değiştiriyoruz
               backgroundColor: urun.sepetteMi ? Colors.red : Colors.blue,
               foregroundColor: Colors.white,
             ),
             onPressed: () {
               // Butona basıldığında Urun modelindeki fonksiyon çalışır ve durumu değiştirir
-             context.read<AliverisViewModel>().sepetDurumunuDegistir(urun.sepetteMi,index);
+              context.read<AlisverisViewModel>().sepetDurumunuDegistir(
+                urun.sepetteMi,
+                index,
+              );
             },
             // Ürünün sepet durumuna göre butonun yazısını dinamik ayarlıyoruz
             child: Text(urun.sepetteMi ? "Sepetten Çıkar" : "Sepete Ekle"),
-            
-            
           ),
         );
       },

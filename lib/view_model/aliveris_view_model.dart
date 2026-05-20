@@ -3,9 +3,9 @@ import 'package:durum_yonetimi_sepet_uygulamasi/view/sepet_sayfasi.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AliverisViewModel with ChangeNotifier {
+class AlisverisViewModel with ChangeNotifier {
   List<Urun> urunler = [];
-  AliverisViewModel() {
+  AlisverisViewModel() {
     for (int a = 0; a <= 5; a++) {
       Urun urun = Urun(a, "Ürün $a ", a + 500, false);
       urunler.add(urun);
@@ -35,18 +35,5 @@ class AliverisViewModel with ChangeNotifier {
       urunler[index].sepetteMi = sepetteMi;
     }
     notifyListeners();
-  }
-
-  SepetSayfasiniAc(BuildContext context) {
-    MaterialPageRoute git = MaterialPageRoute(
-      builder: (context) {
-        return ChangeNotifierProvider(
-          create: (context) {
-            return AliverisViewModel();
-          },
-          child: SepetSayfasi(),
-        );
-      },
-    );
   }
 }

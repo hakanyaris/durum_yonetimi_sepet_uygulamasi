@@ -15,21 +15,22 @@ class AnaUygulama extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-            create: (BuildContext context) {
-              return AliverisViewModel();
-            },
-          ),
-          ChangeNotifierProvider(
-            create: (BuildContext context) {
-              return SepetViewModel();
-            },
-          ),
-        ],
-        child: BirinciSayfa(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (BuildContext context) {
+            return AlisverisViewModel();
+          },
+        ),
+        ChangeNotifierProvider(
+          create: (BuildContext context) {
+            return SepetViewModel();
+          },
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: BirinciSayfa(),
       ),
     );
   }
