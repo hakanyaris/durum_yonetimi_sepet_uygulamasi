@@ -1,7 +1,9 @@
 import 'package:durum_yonetimi_sepet_uygulamasi/model/Urun.dart';
+import 'package:durum_yonetimi_sepet_uygulamasi/view/sepet_sayfasi.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class AliverisViewModel with ChangeNotifier{
+class AliverisViewModel with ChangeNotifier {
   List<Urun> urunler = [];
   AliverisViewModel() {
     for (int a = 0; a <= 5; a++) {
@@ -11,12 +13,40 @@ class AliverisViewModel with ChangeNotifier{
   }
 
   List<Urun> get sepetListesi {
-    return sepetListesi.where((urun) {
+    return urunler.where((urun) {
       return urun.sepetteMi;
     }).toList();
   }
 
-  int get toplamTutar{return  sepetListesi.fold(0, (toplam, urun) => toplam + urun.fiyat);}
+  int get toplamTutar {
+    return sepetListesi.fold(0, (toplam, urun) => toplam + urun.fiyat);
+  }
 
-  int get sepettekiUrunSayisi{return sepetListesi.length;}
+  int get sepettekiUrunSayisi {
+    return sepetListesi.length;
+  }
+
+  sepetDurumunuDegistir(bool sepetteMi, int index) {
+    if (!sepetteMi) {
+      sepetteMi = true;
+      urunler[index].sepetteMi = sepetteMi;
+    } else {
+      sepetteMi = false;
+      urunler[index].sepetteMi = sepetteMi;
+    }
+    notifyListeners();
+  }
+
+  SepetSayfasiniAc(BuildContext context) {
+    MaterialPageRoute git = MaterialPageRoute(
+      builder: (context) {
+        return ChangeNotifierProvider(
+          create: (context) {
+            return AliverisViewModel();
+          },
+          child: SepetSayfasi(),
+        );
+      },
+    );
+  }
 }

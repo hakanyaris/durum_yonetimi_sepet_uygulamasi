@@ -32,7 +32,7 @@ class _BirinciSayfaState extends State<BirinciSayfa> {
           itemBuilder: (context, index) {return 
             ChangeNotifierProvider.value(
               value: viewModel.urunler[index],
-              child: _buildListItem(),
+              child: _buildListItem(index),
             );
           },
         );
@@ -40,7 +40,7 @@ class _BirinciSayfaState extends State<BirinciSayfa> {
     );
   }
 
-  Widget _buildListItem() {
+  Widget _buildListItem(int index) {
     return Consumer<Urun>(
       builder: (context, urun, child) {
         return ListTile(
@@ -54,7 +54,7 @@ class _BirinciSayfaState extends State<BirinciSayfa> {
             ),
             onPressed: () {
               // Butona basıldığında Urun modelindeki fonksiyon çalışır ve durumu değiştirir
-              urun.sepetDurumunuDegistir(urun.sepetteMi);
+             context.read<AliverisViewModel>().sepetDurumunuDegistir(urun.sepetteMi,index);
             },
             // Ürünün sepet durumuna göre butonun yazısını dinamik ayarlıyoruz
             child: Text(urun.sepetteMi ? "Sepetten Çıkar" : "Sepete Ekle"),

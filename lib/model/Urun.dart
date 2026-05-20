@@ -17,8 +17,6 @@ class Urun with ChangeNotifier{
 
  Urun(this.id,this.ad,this.fiyat,this._sepetteMi);
 
- sepetDurumunuDegistir(){
 
- }
 
 }

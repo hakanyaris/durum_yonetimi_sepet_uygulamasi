@@ -1,6 +1,8 @@
+import 'package:durum_yonetimi_sepet_uygulamasi/model/Urun.dart';
 import 'package:durum_yonetimi_sepet_uygulamasi/view/birinci_sayfa.dart';
 import 'package:durum_yonetimi_sepet_uygulamasi/view_model/aliveris_view_model.dart';
-import 'package:durum_yonetimi_sepet_uygulamasi/view_model/birinci_view_model.dart';
+
+import 'package:durum_yonetimi_sepet_uygulamasi/view_model/sepet_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +25,7 @@ class AnaUygulama extends StatelessWidget {
           ),
           ChangeNotifierProvider(
             create: (BuildContext context) {
-              return BirinciViewModel();
+              return SepetViewModel();
             },
           ),
         ],
