@@ -19,7 +19,13 @@ class _BirinciSayfaState extends State<BirinciSayfa> {
         title: Text("AnaSayfa"),
         actions: [
           IconButton(
-            icon: Icon(Icons.shopping_basket),
+            icon: Consumer<AlisverisViewModel>(
+              builder: (context, viewModel, child) {
+                return viewModel.sepettekiUrunSayisi == 0
+                    ? Icon(Icons.shopping_basket)
+                    : Icon(Icons.shopping_basket, color: Colors.green);
+              },
+            ),
             onPressed: () {
               Navigator.push(
                 context,

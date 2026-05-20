@@ -20,6 +20,16 @@ class _SepetSayfasiState extends State<SepetSayfasi> {
             return Text("Sepetim (${viewModel.sepettekiUrunSayisi})");
           },
         ),
+        actions: [
+          Consumer<AlisverisViewModel>(
+            builder: (context, viewModel, child) {
+              return Padding(
+                padding: const EdgeInsets.only(right: 20),
+                child: Text("Toplam : ${viewModel.toplamTutar} TL"),
+              );
+            },
+          ),
+        ],
       ),
       body: _buildBody(),
     );
