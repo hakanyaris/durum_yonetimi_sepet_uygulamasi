@@ -21,9 +21,12 @@ class _BirinciSayfaState extends State<BirinciSayfa> {
           IconButton(
             icon: Consumer<AlisverisViewModel>(
               builder: (context, viewModel, child) {
-                return viewModel.sepettekiUrunSayisi == 0
-                    ? Icon(Icons.shopping_basket)
-                    : Icon(Icons.shopping_basket, color: Colors.green);
+                return Badge(
+                  label: Text(viewModel.sepettekiUrunSayisi.toString()),
+                  child: viewModel.sepettekiUrunSayisi == 0
+                      ? Icon(Icons.shopping_basket_outlined)
+                      : Icon(Icons.shopping_basket, color: Colors.green),
+                );
               },
             ),
             onPressed: () {

@@ -6,10 +6,25 @@ import 'package:provider/provider.dart';
 class AlisverisViewModel with ChangeNotifier {
   List<Urun> urunler = [];
   AlisverisViewModel() {
-    for (int a = 0; a <= 5; a++) {
-      Urun urun = Urun(a, "Ürün $a ", a + 500, false);
+    for (int a = 0; a <= 8; a++) {
+      Urun urun = Urun(a, "Ürün $a ", a + 500, false, false);
       urunler.add(urun);
     }
+    Map<int, String> favorilerMap = {
+      1: "Elektronik",
+      2: "Giyim",
+      3: "Spor",
+      4: "Hepsi",
+    };
+    urunler[0].kategori = favorilerMap[1].toString();
+    urunler[1].kategori = favorilerMap[2].toString();
+    urunler[2].kategori = favorilerMap[3].toString();
+    urunler[3].kategori = favorilerMap[4].toString();
+    urunler[4].kategori = favorilerMap[1].toString();
+    urunler[5].kategori = favorilerMap[2].toString();
+    urunler[6].kategori = favorilerMap[3].toString();
+    urunler[7].kategori = favorilerMap[4].toString();
+    urunler[8].kategori = favorilerMap[4].toString();
   }
 
   List<Urun> get sepetListesi {
