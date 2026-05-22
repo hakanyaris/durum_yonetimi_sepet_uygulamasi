@@ -5,17 +5,18 @@ import 'package:provider/provider.dart';
 
 class AlisverisViewModel with ChangeNotifier {
   List<Urun> urunler = [];
+  Map<int, String> favorilerMap = {
+    1: "Elektronik",
+    2: "Giyim",
+    3: "Spor",
+    4: "Hepsi",
+  };
   AlisverisViewModel() {
     for (int a = 0; a <= 8; a++) {
       Urun urun = Urun(a, "Ürün $a ", a + 500, false, false);
       urunler.add(urun);
     }
-    Map<int, String> favorilerMap = {
-      1: "Elektronik",
-      2: "Giyim",
-      3: "Spor",
-      4: "Hepsi",
-    };
+
     urunler[0].kategori = favorilerMap[1].toString();
     urunler[1].kategori = favorilerMap[2].toString();
     urunler[2].kategori = favorilerMap[3].toString();
@@ -50,5 +51,9 @@ class AlisverisViewModel with ChangeNotifier {
       urunler[index].sepetteMi = sepetteMi;
     }
     notifyListeners();
+  }
+
+  List<Urun> get filtrelenmisUrun {
+    return urunler.where((a) {a.kategori});
   }
 }

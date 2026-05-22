@@ -49,14 +49,48 @@ class _BirinciSayfaState extends State<BirinciSayfa> {
   Widget _buildBody() {
     return Consumer<AlisverisViewModel>(
       builder: (context, viewModel, child) {
-        return ListView.builder(
-          itemCount: viewModel.urunler.length,
-          itemBuilder: (context, index) {
-            return ChangeNotifierProvider.value(
-              value: viewModel.urunler[index],
-              child: _buildListItem(index),
-            );
-          },
+        return Column(
+          children: [
+            SizedBox(
+              height: 50,
+              child: ListView(
+                scrollDirection: Axis.vertical,
+                children: [
+                  Consumer<AlisverisViewModel>(
+                    builder: (context, viewModel, child) {
+                      return Row(
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {},
+                            child: Text(viewModel.favorilerMap[1].toString()),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {},
+                            child: Text(viewModel.favorilerMap[2].toString()),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {},
+                            child: Text(viewModel.favorilerMap[3].toString()),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: viewModel.urunler.length,
+                itemBuilder: (context, index) {
+                  return ChangeNotifierProvider.value(
+                    value: viewModel.urunler[index],
+                    child: _buildListItem(index),
+                  );
+                },
+              ),
+            ),
+          ],
         );
       },
     );
