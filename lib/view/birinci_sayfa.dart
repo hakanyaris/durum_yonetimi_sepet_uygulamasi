@@ -61,15 +61,19 @@ class _BirinciSayfaState extends State<BirinciSayfa> {
                       return Row(
                         children: [
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {viewModel.seciliUrun=4;},
+                            child: Text(viewModel.favorilerMap[4].toString()),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {viewModel.seciliUrun=1;},
                             child: Text(viewModel.favorilerMap[1].toString()),
                           ),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {viewModel.seciliUrun=2;},
                             child: Text(viewModel.favorilerMap[2].toString()),
                           ),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {viewModel.seciliUrun=3;},
                             child: Text(viewModel.favorilerMap[3].toString()),
                           ),
                         ],
@@ -81,10 +85,10 @@ class _BirinciSayfaState extends State<BirinciSayfa> {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: viewModel.urunler.length,
+                itemCount: viewModel.filtrelenmisUrun.length,
                 itemBuilder: (context, index) {
                   return ChangeNotifierProvider.value(
-                    value: viewModel.urunler[index],
+                    value: viewModel.filtrelenmisUrun[index],
                     child: _buildListItem(index),
                   );
                 },
@@ -101,7 +105,7 @@ class _BirinciSayfaState extends State<BirinciSayfa> {
       builder: (context, urun, child) {
         return ListTile(
           title: Text(urun.ad),
-          subtitle: Text("Fiyatı: ${urun.fiyat}"),
+          subtitle: Text("Fiyatı: ${"${urun.fiyat} ve kategori ${urun.kategori}"}"),
           trailing: ElevatedButton(
             style: ElevatedButton.styleFrom(
               // Ürünün sepette olma durumuna göre rengini dinamik değiştiriyoruz
@@ -111,8 +115,8 @@ class _BirinciSayfaState extends State<BirinciSayfa> {
             onPressed: () {
               // Butona basıldığında Urun modelindeki fonksiyon çalışır ve durumu değiştirir
               context.read<AlisverisViewModel>().sepetDurumunuDegistir(
-                urun.sepetteMi,
-                index,
+                
+                urun,
               );
             },
             // Ürünün sepet durumuna göre butonun yazısını dinamik ayarlıyoruz

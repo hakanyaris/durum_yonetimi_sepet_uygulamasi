@@ -69,7 +69,7 @@ class _SepetSayfasiState extends State<SepetSayfasi> {
               Provider.of<AlisverisViewModel>(
                 context,
                 listen: false,
-              ).sepetDurumunuDegistir(viewModel.sepetteMi, viewModel.id);
+              ).sepetDurumunuDegistir( viewModel);
             },
           ),
         );

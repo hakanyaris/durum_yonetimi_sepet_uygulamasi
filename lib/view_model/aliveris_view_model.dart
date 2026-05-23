@@ -5,6 +5,15 @@ import 'package:provider/provider.dart';
 
 class AlisverisViewModel with ChangeNotifier {
   List<Urun> urunler = [];
+  int _seciliUrun = 4;
+
+  int get seciliUrun => _seciliUrun;
+
+  set seciliUrun(int value) {
+    _seciliUrun = value;
+    notifyListeners();
+  }
+
   Map<int, String> favorilerMap = {
     1: "Elektronik",
     2: "Giyim",
@@ -20,12 +29,12 @@ class AlisverisViewModel with ChangeNotifier {
     urunler[0].kategori = favorilerMap[1].toString();
     urunler[1].kategori = favorilerMap[2].toString();
     urunler[2].kategori = favorilerMap[3].toString();
-    urunler[3].kategori = favorilerMap[4].toString();
+    urunler[3].kategori = favorilerMap[1].toString();
     urunler[4].kategori = favorilerMap[1].toString();
     urunler[5].kategori = favorilerMap[2].toString();
     urunler[6].kategori = favorilerMap[3].toString();
-    urunler[7].kategori = favorilerMap[4].toString();
-    urunler[8].kategori = favorilerMap[4].toString();
+    urunler[7].kategori = favorilerMap[3].toString();
+    urunler[8].kategori = favorilerMap[2].toString();
   }
 
   List<Urun> get sepetListesi {
@@ -42,18 +51,18 @@ class AlisverisViewModel with ChangeNotifier {
     return sepetListesi.length;
   }
 
-  sepetDurumunuDegistir(bool sepetteMi, int index) {
-    if (!sepetteMi) {
-      sepetteMi = true;
-      urunler[index].sepetteMi = sepetteMi;
-    } else {
-      sepetteMi = false;
-      urunler[index].sepetteMi = sepetteMi;
-    }
+  sepetDurumunuDegistir(Urun urun) {
+   urun.sepetteMi = !urun.sepetteMi;
     notifyListeners();
   }
 
   List<Urun> get filtrelenmisUrun {
-    return urunler.where((a) {a.kategori});
+    if (seciliUrun == 4) {
+      return urunler;
+    } else {
+      return urunler.where((a) {
+        return a.kategori == favorilerMap[seciliUrun];
+      }).toList();
+    }
   }
 }
